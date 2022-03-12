@@ -8,6 +8,36 @@ body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
+.splash-screen {
+    background-color: rgb(235, 159, 212, 0.7);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+}
+
+.splash-screen span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: blueviolet;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 30px;
+    padding: 15px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.splash-screen span:hover {
+    background-color: rgb(148, 70, 220);
+
+}
+
 .info-container {
     margin: 25px auto;
     width: 1080px;
@@ -79,4 +109,8 @@ body {
     text-align: center;
     backface-visibility: hidden;
     border: 5px solid violet;
+}
+
+.memory-container .game-block.isflipped {
+    transform: rotateY(180deg);
 }
