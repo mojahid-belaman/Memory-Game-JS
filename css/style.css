@@ -67,6 +67,10 @@ body {
     width: 1100px;
 }
 
+.memory-container.blocking {
+    pointer-events:  none;
+}
+
 .memory-container .game-block {
     position: relative;
     height: 200px;
@@ -111,6 +115,7 @@ body {
     border: 5px solid violet;
 }
 
-.memory-container .game-block.isflipped {
+.memory-container .game-block.isflipped,
+.memory-container .game-block.has-match {
     transform: rotateY(180deg);
 }
