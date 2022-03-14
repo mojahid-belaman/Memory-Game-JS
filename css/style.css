@@ -43,22 +43,12 @@ body {
     width: 1080px;
     background-color: blueviolet;
     color: #fff;
-    overflow: hidden;
     padding: 30px 20px;
     border: 5px solid violet;
     border-radius: 5px;
-    font-size: 20px;
-}
-
-.info-container .name {
-    float: left;
-    width: 50%;
-}
-
-.info-container .wrong {
-    float: right;
-    width: 50%;
-    text-align: right;
+    font-size: 25px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .memory-container {
@@ -69,7 +59,7 @@ body {
 }
 
 .memory-container.blocking {
-    pointer-events:  none;
+    pointer-events: none;
 }
 
 .memory-container .game-block {
