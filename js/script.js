@@ -14,7 +14,7 @@ myVar.addEventListener('click', function () {
 
 let blocksContainer = document.querySelector('.memory-container');
 
-let duration = 1000;
+let duration = 500;
 
 let blocks = Array.from(blocksContainer.children);
 
@@ -91,9 +91,10 @@ function isMatch(firstBlock, secondBlock)
         numTry.innerHTML = parseInt(numTry.textContent) + 1;
 
         setTimeout(() => {
-            
+
             secondBlock.classList.remove('isflipped');
             firstBlock.classList.remove('isflipped');
+            
         }, duration);
 
         document.getElementById('failed').play();

@@ -47,6 +47,7 @@ body {
     padding: 30px 20px;
     border: 5px solid violet;
     border-radius: 5px;
+    font-size: 20px;
 }
 
 .info-container .name {
@@ -118,4 +119,5 @@ body {
 .memory-container .game-block.isflipped,
 .memory-container .game-block.has-match {
     transform: rotateY(180deg);
+    pointer-events: none;
 }
