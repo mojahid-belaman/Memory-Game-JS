@@ -1,5 +1,6 @@
 let myVar = document.querySelector('.splash-screen span');
 
+
 myVar.addEventListener('click', function () {
     var myPrompt = prompt('What Is Your Name ?');
 
@@ -20,6 +21,26 @@ let blocks = Array.from(blocksContainer.children);
 let orderRange = Array.from(Array(blocks.length).keys());
 
 let audio;
+
+let minute = document.getElementById('minute');
+
+let second = document.getElementById('second');
+
+setInterval(() => {
+    countUp();
+}, 500);
+
+function countUp() {
+    
+    second.innerHTML = parseInt(second.innerHTML) + 1;
+    if (second.textContent == 60) {
+        if (second.textContent < 10)
+            minute.innerHTML = '0' + parseInt(minute.innerHTML) + 1;
+        else
+            minute.innerHTML = '0' + parseInt(minute.innerHTML) + 1;  
+        second.innerHTML = 0;
+    }
+}
 
 shuffle(orderRange);
 
@@ -99,11 +120,8 @@ function isMatch(firstBlock, secondBlock)
 
         }, duration);
         
-        
         audio = new Audio('../audio/falied.mp3');
         audio.play();
         audio.currentSrc('');
-
-        
     }
 }
