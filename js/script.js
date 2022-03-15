@@ -2,6 +2,7 @@ let myVar = document.querySelector('.splash-screen span');
 
 
 myVar.addEventListener('click', function () {
+
     var myPrompt = prompt('What Is Your Name ?');
 
     if (myPrompt == null || myPrompt == "")
@@ -10,6 +11,11 @@ myVar.addEventListener('click', function () {
         document.querySelector('.name span').innerHTML = myPrompt;
     }
     document.querySelector('.splash-screen').remove();
+    myInterv = setInterval(() => {
+
+        countUp();
+    
+    }, 500)
 })
 
 let blocksContainer = document.querySelector('.memory-container');
@@ -26,18 +32,13 @@ let second = document.getElementById('second');
 
 let minute = document.getElementById('minute');
 
-let myInterv;
+let myInterv, hasMatch;
 
-myBtn.addEventListener('click', () => {
+let faudio = document.getElementById('failed');
 
-    myInterv = setInterval(() => {
+let saudio = document.getElementById('success');
 
-        countUp();
-    
-    }, 500)
-
-})
-
+let numTry = document.querySelector('.wrong span');
 
 function countUp() {
     
@@ -46,6 +47,11 @@ function countUp() {
     if (second.innerHTML == 60) {
         minute.innerHTML =` 0${parseInt(minute.innerHTML) + 1}`;
         second.innerHTML = '00';
+        clearInterval(myInterv);
+    }
+    if (minute.innerHTML == 01 && hasMatch.length != blocks.length) {
+        alert('Failed!');
+        createElement();
     }
 }
 
@@ -80,8 +86,6 @@ function shuffle(array) {
 }
 
 function flipBlock(blockEle) {
-    
-    let hasMatch;
 
     blockEle.classList.add('isflipped');
 
@@ -93,16 +97,20 @@ function flipBlock(blockEle) {
 
         isMatch(flippedAll[0], flippedAll[1]);
     }
-    if (minute.innerHTML == 01)
-    {
-        clearInterval(myInterv);
 
-    }
     hasMatch  = blocks.filter(block => block.classList.contains('has-match'));
+    
+    if (hasMatch.length == blocks.length && minute.innerHTML < 01 ) {
 
-    if (hasMatch.length == blocks.length && second.innerHTML < 60) {
         clearInterval(myInterv);
-    } 
+
+        setTimeout(() => {
+
+            alert('Win!');
+            createElement();
+            
+        }, 500);
+    }
 }
 
 function stopClick() {
@@ -116,8 +124,6 @@ function stopClick() {
 
 function isMatch(firstBlock, secondBlock)
 {
-    let numTry = document.querySelector('.wrong span');
-
     if (firstBlock.dataset.tech === secondBlock.dataset.tech) {
         
         secondBlock.classList.remove('isflipped');
@@ -126,9 +132,8 @@ function isMatch(firstBlock, secondBlock)
         firstBlock.classList.add('has-match');
         secondBlock.classList.add('has-match');
 
-        audio = new Audio('../audio/success.mp3');
-        audio.play();
-        audio.currentSrc('');
+        saudio.currentTime = 0;
+        saudio.play();
         
     }
     else {
@@ -141,8 +146,37 @@ function isMatch(firstBlock, secondBlock)
             
         }, duration);
 
-        audio = new Audio('../audio/falied.mp3');
-        audio.play();
-        audio.currentSrc('');
+        faudio.currentTime = 0;
+        faudio.play();
     }
+}
+
+function createElement() {
+    let myDiv = document.createElement('div');
+
+    let mySpan = document.createElement('span');
+
+    let myText = document.createTextNode('Retry Game');
+
+    mySpan.appendChild(myText);
+
+    myDiv.classList.add('splash-screen');
+
+    myDiv.appendChild(mySpan);
+
+    document.body.appendChild(myDiv);
+
+    mySpan.addEventListener('click', () => {
+        blocks.filter(block => block.classList.remove('has-match'));
+        minute.innerHTML = `00`;
+        second.innerHTML = `00`;
+        document.querySelector('.splash-screen').remove();
+        numTry.innerHTML = `0`;
+        myInterv = setInterval(() => {
+
+            countUp();
+        
+        }, 500)
+
+    })
 }
