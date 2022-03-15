@@ -42,13 +42,14 @@ let numTry = document.querySelector('.wrong span');
 
 function countUp() {
     
-    second.innerHTML = second.innerHTML < 10 ? `0${parseInt(second.innerHTML) + 1}` : parseInt(second.innerHTML) + 1; 
+    second.innerHTML = second.innerHTML < 9 ? `0${parseInt(second.innerHTML) + 1}` : parseInt(second.innerHTML) + 1; 
 
     if (second.innerHTML == 60) {
         minute.innerHTML =` 0${parseInt(minute.innerHTML) + 1}`;
         second.innerHTML = '00';
         clearInterval(myInterv);
     }
+    hasMatch  = blocks.filter(block => block.classList.contains('has-match'));
     if (minute.innerHTML == 01 && hasMatch.length != blocks.length) {
         alert('Failed!');
         createElement();
