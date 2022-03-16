@@ -51,7 +51,11 @@ function countUp() {
     }
     hasMatch  = blocks.filter(block => block.classList.contains('has-match'));
     if (minute.innerHTML == 01 && hasMatch.length != blocks.length) {
-        alert('Failed!');
+        swal({
+            icon: "info",
+            title: "Failed!",
+            text: "Try Again.."
+        });
         createElement();
     }
 }
@@ -107,7 +111,11 @@ function flipBlock(blockEle) {
 
         setTimeout(() => {
 
-            alert('Win!');
+            swal({
+                icon: "success",
+                title: "You Win!",
+                text: "Try Again..."
+            });
             createElement();
             
         }, 500);
